@@ -20,12 +20,25 @@ const io = new Server(server, {
 });
 
 // Handle WebSocket Connection
+
+const fs = require("fs");
+const path = require("path");
+
 io.on("connection", (socket) => {
   console.log("A client connected:", socket.id);
 
   // Listen for events from the client
   socket.on("logEvent", (eventData) => {
     console.log("Event received:", eventData);
+
+    const logFilePath = path.join(__dirname, "event_logs.csv");
+    const logEntry = `${data.timestamp},${data.eventType},${data.element || "N/A"},${data.url || "N/A"}\n`;
+
+    fs.appendFile(logFilePath, logEntry, (err) => {
+      if (err) console.error("Failed to log event:", err);
+    });
+
+
 
     // Broadcast event to all connected clients
     io.emit("newEvent", eventData);

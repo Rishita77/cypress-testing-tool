@@ -1,33 +1,36 @@
 import React, { useState } from "react";
 import { useSocket } from "./hooks/useSocket";
+import useEventCapture from "./hooks/useEventCapture";
 
 function App() {
   const { sendEvent, messages } = useSocket();
   const [inputValue, setInputValue] = useState("");
 
-  const handleSendClick = () => {
-    if (inputValue.trim() !== "") {
-      const event = { eventType: "message", content: inputValue, timestamp: new Date().toISOString() };
-      sendEvent(event);
-      setInputValue(""); // Clear input field
-    }
-  };
+  // Activate event capturing
+  useEventCapture(sendEvent);
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>WebSocket Chat</h2>
+      <h2>Event Capturing System</h2>
+
       <input
         type="text"
-        placeholder="Type a message..."
+        id="test-input"
+        placeholder="Type something..."
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button onClick={handleSendClick}>Send</button>
+      <button id="start-button">Start</button>
+      <button id="stop-button">Stop</button>
 
-      <h3>Received Messages:</h3>
+      <form id="test-form">
+        <button type="submit">Submit Form</button>
+      </form>
+
+      <h3>Captured Events:</h3>
       <ul>
         {messages.map((msg, index) => (
-          <li key={index}>{msg.content} - <i>{msg.timestamp}</i></li>
+          <li key={index}>{JSON.stringify(msg)}</li>
         ))}
       </ul>
     </div>
