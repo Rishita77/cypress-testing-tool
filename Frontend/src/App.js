@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSocket } from "./hooks/useSocket";
 import useEventCapture from "./hooks/useEventCapture";
+import './App.css'; // Import the CSS file for styles
 
 function App() {
   const { sendEvent, messages } = useSocket();
@@ -10,27 +11,32 @@ function App() {
   useEventCapture(sendEvent);
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Event Capturing System</h2>
+    <div className="app-container">
+      <h2 className="app-title">Event Capturing System</h2>
 
-      <input
-        type="text"
-        id="test-input"
-        placeholder="Type something..."
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button id="start-button">Start</button>
-      <button id="stop-button">Stop</button>
+      <div className="input-container">
+        <input
+          type="text"
+          id="test-input"
+          placeholder="Type something..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          className="input-field"
+        />
+        <div className="button-group">
+          <button id="start-button" className="action-button">Start</button>
+          <button id="stop-button" className="action-button">Stop</button>
+        </div>
+      </div>
 
-      <form id="test-form">
-        <button type="submit">Submit Form</button>
+      <form id="test-form" className="form-container">
+        <button type="submit" className="submit-button">Submit Form</button>
       </form>
 
-      <h3>Captured Events:</h3>
-      <ul>
+      <h3 className="captured-events-title">Captured Events:</h3>
+      <ul className="events-list">
         {messages.map((msg, index) => (
-          <li key={index}>{JSON.stringify(msg)}</li>
+          <li key={index} className="event-item">{JSON.stringify(msg)}</li>
         ))}
       </ul>
     </div>

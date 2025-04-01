@@ -4,6 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const { Server } = require("socket.io");
 const logEventToCSV = require("./utils/csvLogger");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
@@ -57,7 +59,18 @@ app.post("/log-event", async (req, res) => {
 
   try {
     await logEventToCSV({ ...event, timestamp: new Date().toISOString() });
-    res.status(200).json({ message: "Event logged successfully" });
+
+    const cypressTest = `
+      describe("Auto-Generated Cypress Test", () => {
+        it("Performs captured events", () => {
+          cy.visit("${event.url}");
+          cy.get("${event.selector}").${event.eventType === "click" ? "click()" : `type("${event.value}")`};
+        });
+      });
+    `;
+
+    fs.writeFileSync(path.join(__dirname, "generatedTest.cy.js"), cypressTest);
+    res.status(200).json({ message: "Event logged and Cypress test generated" });
   } catch (error) {
     res.status(500).json({ message: "Error logging event" });
   }
