@@ -57,12 +57,14 @@ app.post("/log-event", (req, res) => {
   console.log("✅ Received event:", event); // Log incoming event data
 
   const testCode = `
-describe("Generated Test", () => {
-  it("Tests ${event.eventType} event", () => {
-    cy.visit("http://localhost:3000");
-    cy.get("${event.element}").click();
+  describe("Generated Test", () => {
+    it("Tests ${event.eventType} event on ${event.element}", () => {
+      cy.visit("http://localhost:3000");
+  
+      // Ensure the element exists before interacting
+      cy.get("${event.id ? `#${event.id}` : event.element}").should("exist")${event.eventType === "input" ? `.type("Test input")` : ".click()"};
+    });
   });
-});
   `;
 
   const testFilePath = path.join(

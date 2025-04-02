@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import axios from "axios";
 
 const useEventCapture = (sendEvent) => {
   useEffect(() => {
     // Function to capture clicks
-    const handleClick = (event) => {
+    const handleClick = async (event) => {
       const eventData = {
         eventType: "click",
         element: event.target.tagName.toLowerCase(),
@@ -12,7 +13,15 @@ const useEventCapture = (sendEvent) => {
         timestamp: new Date().toISOString(),
       };
       sendEvent(eventData);
+
+      try {
+        const res = await axios.post("http://localhost:5000/log-event", eventData);
+        console.log("✅ Event sent successfully:", res.data);
+      } catch (err) {
+        console.error("❌ Error sending event:", err);
+      }
     };
+
 
     // Function to capture input changes
     const handleInputChange = (event) => {
