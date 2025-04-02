@@ -52,28 +52,32 @@ io.on("connection", (socket) => {
   });
 });
 
-// API Endpoint for Logging Events
-app.post("/log-event", async (req, res) => {
+app.post("/log-event", (req, res) => {
   const event = req.body;
-  console.log("Event received via API:", event);
+  console.log("✅ Received event:", event); // Log incoming event data
 
-  try {
-    await logEventToCSV({ ...event, timestamp: new Date().toISOString() });
+  const testCode = `
+describe("Generated Test", () => {
+  it("Tests ${event.eventType} event", () => {
+    cy.visit("http://localhost:3000");
+    cy.get("${event.element}").click();
+  });
+});
+  `;
 
-    const cypressTest = `
-      describe("Auto-Generated Cypress Test", () => {
-        it("Performs captured events", () => {
-          cy.visit("${event.url}");
-          cy.get("${event.selector}").${event.eventType === "click" ? "click()" : `type("${event.value}")`};
-        });
-      });
-    `;
+  const testFilePath = path.join(
+    __dirname,
+    "../Frontend/cypress/e2e/generatedTest.cy.js"
+  );
 
-    fs.writeFileSync(path.join(__dirname, "generatedTest.cy.js"), cypressTest);
-    res.status(200).json({ message: "Event logged and Cypress test generated" });
-  } catch (error) {
-    res.status(500).json({ message: "Error logging event" });
-  }
+  fs.writeFile(testFilePath, testCode, (err) => {
+    if (err) {
+      console.error("❌ Failed to write test file:", err);
+      return res.status(500).json({ message: "Failed to write test" });
+    }
+    console.log("✅ Test file successfully created at:", testFilePath);
+    res.status(200).json({ message: "Test logged successfully" });
+  });
 });
 
 // Start Server
