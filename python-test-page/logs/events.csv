@@ -1,0 +1,47 @@
+eventType,element,timestamp
+click,startCapture,2025-04-06T20:36:29.997856
+click,,BUTTON,2025-04-06T15:12:25.131Z
+submit,test-form,2025-04-06T15:12:25.135Z
+click,start-button,BUTTON,2025-04-06T15:12:27.261Z
+click,stop-button,BUTTON,2025-04-06T15:12:29.089Z
+click,,BODY,2025-04-06T15:12:30.277Z
+click,start-button,BUTTON,2025-04-06T15:13:24.267Z
+click,start-button,BUTTON,2025-04-06T15:13:29.942Z
+click,start-button,BUTTON,2025-04-06T15:13:30.456Z
+click,,BUTTON,2025-04-06T15:13:32.125Z
+submit,test-form,2025-04-06T15:13:32.126Z
+click,,BUTTON,2025-04-06T15:14:54.131Z
+Z
+click,stop-button,BUTTON,2025-04-06T15:14:57.158Z
+click,start-button,BUTTON,2025-04-06T15:14:58.474Z
+input,test-input,h,2025-04-06T15:15:04.584Z
+input,test-input,hk,2025-04-06T15:15:04.866Z
+input,test-input,hkh,2025-04-06T15:15:05.288Z
+input,test-input,hkhk,2025-04-06T15:15:05.581Z
+click,,BUTTON,2025-04-06T15:15:07.629Z
+submit,test-form,2025-04-06T15:15:07.630Z
+click,,DIV,2025-04-06T15:15:10.621Z
+input,test-input,,2025-04-06T15:15:12.313Z
+click,,H2,2025-04-06T15:15:15.394Z
+click,,H2,2025-04-06T15:15:16.860Z
+click,,H3,2025-04-06T15:15:20.227Z
+click,,H3,2025-04-06T15:15:21.439Z
+input,test-input,H,2025-04-06T15:42:00.023Z
+input,test-input,He,2025-04-06T15:42:00.045Z
+input,test-input,Hel,2025-04-06T15:42:00.058Z
+input,test-input,Hell,2025-04-06T15:42:00.072Z
+input,test-input,Hello,2025-04-06T15:42:00.085Z
+input,test-input,Hello ,2025-04-06T15:42:00.098Z
+input,test-input,Hello C,2025-04-06T15:42:00.110Z
+input,test-input,Hello Cy,2025-04-06T15:42:00.123Z
+input,test-input,Hello Cyp,2025-04-06T15:42:00.137Z
+input,test-input,Hello Cypr,2025-04-06T15:42:00.150Z
+input,test-input,Hello Cypre,2025-04-06T15:42:00.163Z
+input,test-input,Hello Cypres,2025-04-06T15:42:00.175Z
+input,test-input,Hello Cypress,2025-04-06T15:42:00.187Z
+input,test-input,Hello Cypress!,2025-04-06T15:42:00.200Z
+click,start-button,BUTTON,2025-04-06T15:42:00.410Z
+click,stop-button,BUTTON,2025-04-06T15:42:00.491Z
+submit,test-form,2025-04-06T15:42:00.658Z
+START,2025-04-06T15:46:38.755Z
+click,start-button,BUTTON,2025-04-06T15:46:38.764Z
